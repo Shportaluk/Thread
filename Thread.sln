@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 Thread", "Thread\1 Thread.csproj", "{6B87DFF3-5468-4D3B-B536-B4D27390E860}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2 Thead", "2 Thead\2 Thead.csproj", "{EC05FAED-FE15-4A4D-8240-A32716DA0969}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 Thread", "3 Thread\3 Thread.csproj", "{3CF3C290-A1C5-4E56-A599-A8C42DBACD86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B87DFF3-5468-4D3B-B536-B4D27390E860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B87DFF3-5468-4D3B-B536-B4D27390E860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B87DFF3-5468-4D3B-B536-B4D27390E860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B87DFF3-5468-4D3B-B536-B4D27390E860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC05FAED-FE15-4A4D-8240-A32716DA0969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC05FAED-FE15-4A4D-8240-A32716DA0969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC05FAED-FE15-4A4D-8240-A32716DA0969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC05FAED-FE15-4A4D-8240-A32716DA0969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF3C290-A1C5-4E56-A599-A8C42DBACD86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF3C290-A1C5-4E56-A599-A8C42DBACD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF3C290-A1C5-4E56-A599-A8C42DBACD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF3C290-A1C5-4E56-A599-A8C42DBACD86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
