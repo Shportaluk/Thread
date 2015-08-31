@@ -21,7 +21,7 @@ namespace _3_Thread
                 {
                     sum += b[i];
                 }
-
+                //Thread.Sleep(100);
                 return sum;
             }
         }
@@ -31,7 +31,7 @@ namespace _3_Thread
         static void Main(string[] args)
         {
             // Ініціалізація
-            byte[][] b = new byte[100][];
+            byte[][] b = new byte[1000][];
 
             for (int i = 0; i < b.Length; i++)
             {
@@ -42,27 +42,38 @@ namespace _3_Thread
                 }
             }
         
-            int threadId;
+            int[] async_threadId = new int[b.Length];
 
+            for (int i = 0; i < b.Length; i++)
+            {
+                async_threadId[i] = i;
+            }
 
+            List<AsyncMethodCaller> async_caller = new List<AsyncMethodCaller>();
+            List<IAsyncResult> async_res = new List<IAsyncResult>();
+            
             // Проходи масив по рядку
             for (int i = 0; i < b.Length; i++)
             {
                 AsyncSum async_sum = new AsyncSum();
                 AsyncMethodCaller caller = new AsyncMethodCaller(async_sum.TestMethod);
 
-                IAsyncResult result = caller.BeginInvoke(100, b[i], out threadId, null, null);
-                result.AsyncWaitHandle.WaitOne();
-                int returnValue = caller.EndInvoke(out threadId, result);
-                result.AsyncWaitHandle.Close();
+                async_caller.Add(caller);
 
-
-                Console.WriteLine("The call executed on thread {0}, with return value \"{1}\".",
-                    threadId, returnValue);
+                async_res.Add (async_caller[i].BeginInvoke(100, b[i], out async_threadId[i], null, null) );
+                
             }
 
-                
-               
+            int returnValue;
+
+            for (int i = 0; i < b.Length; i++)
+            {
+                async_res[i].AsyncWaitHandle.WaitOne();
+                returnValue = async_caller[i].EndInvoke(out async_threadId[i], async_res[i]);
+                async_res[i].AsyncWaitHandle.Close();
+
+                Console.WriteLine("The call executed on thread {0}, with return value \"{1}\".", async_threadId[i], returnValue);
+            }
 
             Console.ReadLine();
         }
