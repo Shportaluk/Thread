@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace _2_Thead
 {
@@ -11,11 +12,11 @@ namespace _2_Thead
     {
         static void Main(string[] args)
         {
-            byte[][] b = new byte[100][];
+            byte[][] b = new byte[10000][];
 
             for (int i = 0; i < b.Length; i++)
             {
-                b[i] = new byte[100];
+                b[i] = new byte[10000];
                 for (int j = 0; j < b[i].Length; j++)
                 {
                     b[i][j] = 1;
@@ -31,11 +32,11 @@ namespace _2_Thead
         static public void ShowSumCol(object obj)
         {
             byte[][] b = (byte[][])obj;
-
+            
             for (int i = 0; i < b.Length; i++)
             {
                 ThreadPool.QueueUserWorkItem( SumCol, b[i] );
-                Thread.Sleep(100);
+                //Thread.Sleep(100);
             }
         }
 

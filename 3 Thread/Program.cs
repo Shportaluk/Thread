@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,10 +12,9 @@ namespace _3_Thread
     {
         public class AsyncSum
         {
-            public int TestMethod(int callDuration, byte[] b, out int threadId)
+            public int TestMethod( byte[] b, out int threadId)
             {
                 threadId = Thread.CurrentThread.ManagedThreadId;
-                Thread.Sleep(callDuration);
                 int sum = 0;
 
                 for (int i = 0; i < b.Length; i++)
@@ -26,16 +26,16 @@ namespace _3_Thread
             }
         }
 
-        public delegate int AsyncMethodCaller(int callDuration, byte[] b, out int threadId);
+        public delegate int AsyncMethodCaller(byte[] b, out int threadId);
 
         static void Main(string[] args)
         {
             // Ініціалізація
-            byte[][] b = new byte[1000][];
+            byte[][] b = new byte[10000][];
 
             for (int i = 0; i < b.Length; i++)
             {
-                b[i] = new byte[100];
+                b[i] = new byte[10000];
                 for (int j = 0; j < b[i].Length; j++)
                 {
                     b[i][j] = 1;
@@ -51,6 +51,10 @@ namespace _3_Thread
 
             List<AsyncMethodCaller> async_caller = new List<AsyncMethodCaller>();
             List<IAsyncResult> async_res = new List<IAsyncResult>();
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             
             // Проходи масив по рядку
             for (int i = 0; i < b.Length; i++)
@@ -60,7 +64,7 @@ namespace _3_Thread
 
                 async_caller.Add(caller);
 
-                async_res.Add (async_caller[i].BeginInvoke(100, b[i], out async_threadId[i], null, null) );
+                async_res.Add (async_caller[i].BeginInvoke( b[i], out async_threadId[i], null, null) );
                 
             }
 
@@ -74,6 +78,12 @@ namespace _3_Thread
 
                 Console.WriteLine("The call executed on thread {0}, with return value \"{1}\".", async_threadId[i], returnValue);
             }
+
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
 
             Console.ReadLine();
         }
